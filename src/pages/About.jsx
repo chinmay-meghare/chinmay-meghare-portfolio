@@ -4,33 +4,55 @@ import { ScrollTrigger } from "gsap/all";
 import { useRef } from "react";
 
 const About = () => {
-  const imgDivRef = useRef(null);
-  const imageRef = useRef(null);
   gsap.registerPlugin(ScrollTrigger);
 
-  useGSAP(() => {
-    gsap.to(imgDivRef.current, {
+  const imageDivRef = useRef(null);
+  const imageRef = useRef(null);
+
+  const imageArray = [
+    "https://images.pexels.com/photos/4079215/pexels-photo-4079215.jpeg",
+    "https://images.pexels.com/photos/5397723/pexels-photo-5397723.jpeg",
+    "https://images.pexels.com/photos/5901065/pexels-photo-5901065.jpeg",
+    "https://images.pexels.com/photos/5191436/pexels-photo-5191436.jpeg",
+    "https://images.pexels.com/photos/31978035/pexels-photo-31978035.jpeg",
+    "https://images.pexels.com/photos/17023274/pexels-photo-17023274.jpeg",
+    "https://images.pexels.com/photos/32031995/pexels-photo-32031995.jpeg",
+    "https://images.pexels.com/photos/5542498/pexels-photo-5542498.jpeg",
+  ];
+
+  useGSAP(function () {
+    
+    gsap.to(imageDivRef.current, {
       scrollTrigger: {
-        trigger: imgDivRef.current,
-        markers: true,
+        trigger: imageDivRef.current,
         start: "top 29%",
         end: "top -70%",
-        scrub:true,
-        pin:true,
+        pin: true,
+        onUpdate: (elem) => {
+          let imageIndex;
+          if (elem.progress < 1) {
+            imageIndex = Math.floor(elem.progress * imageArray.length);
+          } else {
+            imageIndex = imageArray.length - 1;
+          }
+
+          imageRef.current.src = imageArray[imageIndex];
+        },
       },
     });
-  }, []);
+  });
 
   return (
     <div>
       <div className="section-1">
         <div
-          ref={imgDivRef}
-          className="absolute h-[20vw] overflow-hidden rounded-3xl w-[15vw] top-44 left-[29vw] bg-red-400"
+          ref={imageDivRef}
+          className="absolute h-[20vw] overflow-hidden rounded-3xl w-[15vw] top-44 left-[29vw]"
         >
-          <img ref={imageRef}
+          <img
+            ref={imageRef}
             className="h-full w-full object-cover"
-            src="https://k72.ca/images/teamMembers/Carl_480x640.jpg?w=480&h=640&fit=crop&s=f0a84706bc91a6f505e8ad35f520f0b7"
+            src="https://images.pexels.com/photos/4079215/pexels-photo-4079215.jpeg"
             alt=""
           />
         </div>
