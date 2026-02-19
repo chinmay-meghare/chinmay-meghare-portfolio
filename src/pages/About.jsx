@@ -1,13 +1,13 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 const About = () => {
   gsap.registerPlugin(ScrollTrigger);
-
   const imageDivRef = useRef(null);
   const imageRef = useRef(null);
+  const preloadedImages = useRef([]);
 
   const imageArray = [
     "https://images.pexels.com/photos/4079215/pexels-photo-4079215.jpeg",
@@ -20,8 +20,16 @@ const About = () => {
     "https://images.pexels.com/photos/5542498/pexels-photo-5542498.jpeg",
   ];
 
+  // Preload all images before GSAP runs
+  useEffect(() => {
+    preloadedImages.current = imageArray.map((src) => {
+      const img = new Image();
+      img.src = src;
+      return img;
+    });
+  }, []);
+
   useGSAP(function () {
-    
     gsap.to(imageDivRef.current, {
       scrollTrigger: {
         trigger: imageDivRef.current,
@@ -35,12 +43,12 @@ const About = () => {
           } else {
             imageIndex = imageArray.length - 1;
           }
-
-          imageRef.current.src = imageArray[imageIndex];
+         
+          imageRef.current.src = preloadedImages.current[imageIndex].src;
         },
       },
     });
-  });
+  }, []);
 
   return (
     <div>
