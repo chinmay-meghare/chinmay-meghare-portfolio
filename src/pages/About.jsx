@@ -52,7 +52,7 @@ const About = () => {
 
   return (
     <div>
-      <div className="section-1">
+      <div className="section-1 relative py-1">
         <div
           ref={imageDivRef}
           className="absolute h-[20vw] overflow-hidden rounded-3xl w-[15vw] top-44 left-[29vw]"
