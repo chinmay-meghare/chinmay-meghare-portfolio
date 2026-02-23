@@ -56,7 +56,7 @@ const Navbar = () => {
         </div>
         <div
           ref={navGreenRef}
-          className="bg-[#D3FD50] transition-all absolute top-0 h-0 w-full overflow-hidden "
+          className="bg-accentcolor transition-all absolute top-0 h-0 w-full overflow-hidden "
         >
           <div className="h-10 w-full flex justify-end items-center pr-2">
             <svg
