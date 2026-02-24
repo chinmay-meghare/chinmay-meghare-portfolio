@@ -9,13 +9,13 @@ function App() {
   return (
     <>
       <div>
-        {/* <Navbar/> */}
+        <Navbar/>
         <FullScreenNav/>
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
-        </Routes> */}
+        </Routes>
       </div>
     </>
   );
