@@ -1,34 +1,74 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { NavbarContext } from "../../context/NavContext";
 
 const FullScreenNav = () => {
   const fullNavLinksRef = useRef(null);
+  const fullScreenRef = useRef(null);
 
-  useGSAP(function () {
+  const [navOpen, setNavOpen] = useContext(NavbarContext);
+  console.log(navOpen);
+
+  function gsapAnimation() {
     const tl = gsap.timeline();
-
-    tl.from(".stairing", {
-      delay: 1,
-      height: 0,
+    tl.to(".fullscreennav", {
+      display: "block",
+    });
+    tl.to(".stairing", {
+      delay: 0.1,
+      height: "100%",
       stagger: {
         amount: -0.2,
       },
     });
-    tl.from(fullNavLinksRef.current, {
-      opacity: 0,
+    tl.to(".link", {
+      opacity: 1,
+      rotateX: 0,
+      stagger: {
+        amount: 0.3,
+      },
     });
-    tl.from(".link", {
-      opacity:0,
+    tl.to(".navlink", {
+      opacity: 1,
+    });
+  }
+  function gsapAnimationReverse() {
+    const tl = gsap.timeline();
+    tl.to(".link", {
+      opacity: 0,
       rotateX: 90,
       stagger: {
-        amount: -0.2,
+        amount: 0.1,
       },
     });
-  });
+    tl.to(".stairing", {
+      height: 0,
+      stagger: {
+        amount: 0.1,
+      },
+    });
+    tl.to(".navlink", {
+      opacity: 0,
+    });
+    tl.to(".fullscreennav", {
+      display: "none",
+    });
+  }
+
+  useGSAP(function () {
+      if (navOpen) {
+        gsapAnimation();
+      } else {
+        gsapAnimationReverse();
+      }
+    }, 
+    [navOpen],
+  );
 
   return (
-    <div 
+    <div
+      ref={fullScreenRef}
       id="fullscreennav"
       className="fullscreennav hidden text-white overflow-hidden h-screen w-full z-50 absolute"
     >
@@ -47,7 +87,12 @@ const FullScreenNav = () => {
           <div className="">
             <h3 className="uppercase text-3xl">chinmay.</h3>
           </div>
-          <div className="h-36 w-36 group flex items-center justify-center">
+          <div
+            onClick={() => {
+              setNavOpen(false);
+            }}
+            className="h-36 w-36 group flex items-center justify-center"
+          >
             <svg
               viewBox="4 4 16 16"
               width="140"
