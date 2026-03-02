@@ -3,7 +3,7 @@ import React from "react";
 const ProjectCard = (props) => {
   return (
     <>
-      <div className="h-full w-1/2 group relative rounded-none hover:rounded-[60px] overflow-hidden transition-[border-radius] duration-500">
+      <div className="h-full lg:w-1/2 group relative rounded-none hover:rounded-[60px] overflow-hidden transition-[border-radius] duration-500">
         <img
           loading="lazy" 
           decoding="async"  
@@ -17,7 +17,7 @@ const ProjectCard = (props) => {
           </h2>
         </div>
       </div>
-      <div className="h-full w-1/2 group relative rounded-none hover:rounded-[60px] overflow-hidden transition-[border-radius] duration-500">
+      <div className="h-full lg:w-1/2 group relative rounded-none hover:rounded-[60px] overflow-hidden transition-[border-radius] duration-500">
         <img
           loading="lazy" 
           decoding="async"

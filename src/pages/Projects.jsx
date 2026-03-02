@@ -39,7 +39,7 @@ const Projects = () => {
   useGSAP(
     function () {
       gsap.from(".hero", {
-        height: "70px",
+        height: "10rem",
         stagger: {
           amount: 0.4,
         },
@@ -56,9 +56,9 @@ const Projects = () => {
 
   return (
     <>
-      <div ref={containerRef} className="p-4">
+      <div ref={containerRef} className="md:p-4">
         <div className="pt-[45vh]">
-          <h2 className="font-[font2] text-[9.5vw] uppercase">Projects</h2>
+          <h2 className="font-[font2] text-[14vw] md:text-[9.5vw] uppercase">Projects</h2>
         </div>
 
         <div className="lol">
@@ -66,7 +66,7 @@ const Projects = () => {
             return (
               <div
                 key={idx}
-                className="hero will-change-transform w-full h-96 mb-4 flex gap-4"
+                className="hero will-change-transform w-full min-h-[90%] lg:h-96 mb-4 flex flex-col lg:flex-row  gap-4"
               >
                 <ProjectCard image1={elem.image1} image2={elem.image2} />
               </div>

@@ -2,6 +2,7 @@ import { useContext, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { NavbarContext } from "../../context/NavContext";
+import { Link } from "react-router-dom";
 
 const FullScreenNav = () => {
   const fullNavLinksRef = useRef(null);
@@ -56,13 +57,14 @@ const FullScreenNav = () => {
     });
   }
 
-  useGSAP(function () {
+  useGSAP(
+    function () {
       if (navOpen) {
         gsapAnimation();
       } else {
         gsapAnimationReverse();
       }
-    }, 
+    },
     [navOpen],
   );
 
@@ -83,7 +85,7 @@ const FullScreenNav = () => {
       </div>
 
       <div ref={fullNavLinksRef} className="relative">
-        <div className="navlink flex w-full justify-between items-start p-2">
+        <div className="navlink flex w-full justify-between items-start lg:p-5 p-2">
           <div className="">
             <h3 className="uppercase text-3xl">chinmay.</h3>
           </div>
@@ -91,7 +93,7 @@ const FullScreenNav = () => {
             onClick={() => {
               setNavOpen(false);
             }}
-            className="h-36 w-36 group flex items-center justify-center"
+            className="md:h-36 md:w-36 h-28 w-28 group flex items-center justify-center"
           >
             <svg
               viewBox="4 4 16 16"
@@ -123,135 +125,141 @@ const FullScreenNav = () => {
         </div>
 
         {/* Nav Links */}
-        <div className="">
+        <div className="pt-[20vh] sm:pt-0">
           {/* PROJECTS */}
-          <div className="link origin-top relative border-t border-white">
-            <h1 className="font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-              projects
-            </h1>
-            <div className="moveLink absolute text-black flex top-0 bg-accentcolor">
-              <div className="moveX flex items-center">
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
-                />
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
-                  alt=""
-                />
-              </div>
-              <div className="moveX flex items-center">
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
-                />
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
-                  alt=""
-                />
+          <Link to="/projects">
+            <div className="link origin-top relative border-t border-white">
+              <h1 className="font-[font2] text-[13vw] md:text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                projects
+              </h1>
+              <div className="moveLink absolute text-black flex top-0 bg-accentcolor">
+                <div className="moveX flex items-center">
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
+                  />
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
+                    alt=""
+                  />
+                </div>
+                <div className="moveX flex items-center">
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
+                  />
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* ABOUT */}
-          <div className="link origin-top relative border-t border-white">
-            <h1 className="font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-              About
-            </h1>
-            <div className="moveLink absolute text-black flex top-0 bg-accentcolor">
-              <div className="moveX flex items-center">
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
-                />
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
-                  alt=""
-                />
-              </div>
-              <div className="moveX flex items-center">
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
-                />
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
-                  alt=""
-                />
+          <Link to="/about">
+            <div className="link origin-top relative border-t border-white">
+              <h1 className="font-[font2] text-[13vw] md:text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                About
+              </h1>
+              <div className="moveLink absolute text-black flex top-0 bg-accentcolor">
+                <div className="moveX flex items-center">
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
+                  />
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
+                    alt=""
+                  />
+                </div>
+                <div className="moveX flex items-center">
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
+                  />
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* CONTACT */}
-          <div className="link origin-top relative border-y border-white">
-            <h1 className="font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-              Contact
-            </h1>
-            <div className="moveLink absolute text-black flex top-0 bg-accentcolor">
-              <div className="moveX flex items-center">
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
-                />
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
-                  alt=""
-                />
-              </div>
-              <div className="moveX flex items-center">
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
-                />
-                <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
-                  see&nbsp;everything
-                </h2>
-                <img
-                  className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
-                  src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
-                  alt=""
-                />
+          <Link to="/contact">
+            <div className="link origin-top relative border-y border-white">
+              <h1 className="font-[font2] text-[13vw] md:text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                Contact
+              </h1>
+              <div className="moveLink absolute text-black flex top-0 bg-accentcolor">
+                <div className="moveX flex items-center">
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
+                  />
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
+                    alt=""
+                  />
+                </div>
+                <div className="moveX flex items-center">
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg"
+                  />
+                  <h2 className="whitespace-nowrap font-[font2] text-[8vw] text-center leading-[0.9] pt-3 uppercase">
+                    see&nbsp;everything
+                  </h2>
+                  <img
+                    className="h-[4.3rem] shrink-0 object-cover w-64 rounded-full"
+                    src="https://images.pexels.com/photos/811587/pexels-photo-811587.jpeg"
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

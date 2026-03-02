@@ -4,11 +4,13 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Navbar from "./components/Navigation/Navbar";
 import FullScreenNav from "./components/Navigation/FullScreenNav";
+import { TailwindIndicator } from "./components/tailwind-indicator";
 
 function App() {
   return (
     <>
-      <div>
+      <div className="overflow-x-hidden">
+        <TailwindIndicator/>
         <Navbar/>
         <FullScreenNav/>
         <Routes>

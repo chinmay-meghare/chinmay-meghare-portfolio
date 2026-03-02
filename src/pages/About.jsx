@@ -1,20 +1,19 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useRef} from "react";
+import { useRef } from "react";
 
 const imageArray = [
-  "https://images.pexels.com/photos/4079215/pexels-photo-4079215.jpeg",
-  "https://images.pexels.com/photos/5397723/pexels-photo-5397723.jpeg",
-  "https://images.pexels.com/photos/5901065/pexels-photo-5901065.jpeg",
-  "https://images.pexels.com/photos/5191436/pexels-photo-5191436.jpeg",
-  "https://images.pexels.com/photos/31978035/pexels-photo-31978035.jpeg",
-  "https://images.pexels.com/photos/17023274/pexels-photo-17023274.jpeg",
-  "https://images.pexels.com/photos/32031995/pexels-photo-32031995.jpeg",
-  "https://images.pexels.com/photos/5542498/pexels-photo-5542498.jpeg",
+  "https://images.pexels.com/photos/4079215/pexels-photo-4079215.jpeg?auto=compress&cs=tinysrgb&w=800&q=70",
+  "https://images.pexels.com/photos/5397723/pexels-photo-5397723.jpeg?auto=compress&cs=tinysrgb&w=800&q=70",
+  "https://images.pexels.com/photos/5901065/pexels-photo-5901065.jpeg?auto=compress&cs=tinysrgb&w=800&q=70",
+  "https://images.pexels.com/photos/5191436/pexels-photo-5191436.jpeg?auto=compress&cs=tinysrgb&w=800&q=70",
+  "https://images.pexels.com/photos/31978035/pexels-photo-31978035.jpeg?auto=compress&cs=tinysrgb&w=800&q=70",
+  "https://images.pexels.com/photos/17023274/pexels-photo-17023274.jpeg?auto=compress&cs=tinysrgb&w=800&q=70",
+  "https://images.pexels.com/photos/32031995/pexels-photo-32031995.jpeg?auto=compress&cs=tinysrgb&w=800&q=70",
+  "https://images.pexels.com/photos/5542498/pexels-photo-5542498.jpeg?auto=compress&cs=tinysrgb&w=800&q=70",
 ];
 
-// Preload outside component too — starts immediately when module loads
 const preloadedImages = imageArray.map((src) => {
   const img = new Image();
   img.src = src;
@@ -39,7 +38,7 @@ const About = () => {
         // pinType: "transform",
         scrub: 1,
         anticipatePin: 1,
-        invalidateOnRefresh:true,
+        invalidateOnRefresh: true,
         onUpdate: (elem) => {
           if (!imageRef.current || preloadedImages.length === 0) return;
 
@@ -59,7 +58,7 @@ const About = () => {
       <div className="section-1 relative py-1">
         <div
           ref={imageDivRef}
-          className="absolute h-[20vw] rounded-3xl w-[15vw] top-44 left-[29vw]"
+          className="absolute h-[20vw] rounded-3xl w-[15vw] top:10 lg:top-44 left-[29vw]"
         >
           <img
             ref={imageRef}

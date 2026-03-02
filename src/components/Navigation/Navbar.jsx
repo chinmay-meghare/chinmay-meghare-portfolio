@@ -5,10 +5,10 @@ const Navbar = () => {
   const navGreenRef = useRef(null);
   const [navOpen, setNavOpen] = useContext(NavbarContext);
 
-  return (
-    <div className="z-4 font-[font2] flex fixed top-0 w-full items-start justify-between">
+  return (  
+    <div className="z-4 font-[font2] flex fixed top-0 w-full items-start justify-between ">
       <div className="p-2">
-        <h3 className="uppercase text-3xl">chinmay.</h3>
+        <h3 className="uppercase md:text-2xl lg:text-3xl">chinmay.</h3>
       </div>
 
       <div
