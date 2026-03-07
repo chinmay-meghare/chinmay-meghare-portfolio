@@ -2,18 +2,31 @@
 
 @theme {
   --color-accentcolor: #d3fd50;
+
+  --font-inter: "inter", sans-serif;
+
+  --font-lausanne: "font1", sans-serif;
 }
 
-@font-face {
-  font-family: font1;
-  src: url(../fonts/Lausanne-300.woff2);
-}
-@font-face {
-  font-family: font2;
-  src: url(../fonts/Lausanne-500.woff2);
-}
+@layer base {
+  @font-face {
+    font-family: font1;
+    src: url(../fonts/Lausanne-300.woff2);
+  }
+  @font-face {
+    font-family: font2;
+    src: url(../fonts/Lausanne-500.woff2);
+  }
 
-html.lenis, html.lenis body {
+  @font-face {
+    font-family: inter;
+    src: url(../fonts/Inter-VariableFont_wght.woff2);
+    font-weight: 100 900;
+    font-display: swap;
+  }
+}
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -61,4 +74,9 @@ body {
   to {
     transform: translateX(-100%);
   }
+}
+
+#intro {
+  visibility: hidden;
+  opacity: 0;
 }

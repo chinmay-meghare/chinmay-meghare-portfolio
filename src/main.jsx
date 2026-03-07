@@ -9,11 +9,11 @@ import NavContext from "./context/NavContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <StairsLoading>
+      {/* <StairsLoading> */}
         <NavContext>
         <App />
         </NavContext>
-      </StairsLoading>
+      {/* </StairsLoading> */}
     </BrowserRouter>
   </StrictMode>,
 );
