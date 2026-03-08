@@ -40,6 +40,7 @@ const Hero = () => {
             mask: "lines",
             onSplit(self) {
               return gsap.from(self.lines, {
+                delay:0.4,
                 duration: 1,
                 yPercent: 100,
                 opacity: 0,

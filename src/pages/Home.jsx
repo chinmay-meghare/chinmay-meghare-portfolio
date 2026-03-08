@@ -4,6 +4,7 @@ import HomeHeroText from "../components/home/HomeHeroText";
 import HomeBotttomText from "../components/home/HomeBotttomText";
 import Hero from "../components/home/Hero";
 import About from "./About";
+import Projects from "./Projects";
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
 
     <Hero/>
     <About/>
+    <Projects/>
     </>
   );
 };
