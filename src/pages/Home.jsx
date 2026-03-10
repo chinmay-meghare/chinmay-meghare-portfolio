@@ -6,21 +6,20 @@ import Hero from "../components/home/Hero";
 import About from "./About";
 import Projects from "./Projects";
 
-
 const Home = () => {
   return (
     <>
-    {/* <div className="h-screen w-screen fixed">
+      {/* <div className="h-screen w-screen fixed">
       <Video />
-    </div>
+    </div>  
     <div className="h-screen w-screen text-white relative flex flex-col justify-between">
       <HomeHeroText/>
       <HomeBotttomText/>
     </div> */}
 
-    <Hero/>
-    <About/>
-    <Projects/>
+      <Hero />
+      <About />
+      <Projects />
     </>
   );
 };
