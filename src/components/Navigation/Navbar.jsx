@@ -1,11 +1,13 @@
+"use client";
+
 import { useContext, useRef } from "react";
 import { NavbarContext } from "../../context/NavContext";
-  
-const Navbar = () => {
+
+export default function Navbar() {
   const navGreenRef = useRef(null);
   const [navOpen, setNavOpen] = useContext(NavbarContext);
 
-  return (  
+  return (
     <div className="z-5 font-[font2] flex fixed top-0 w-full items-start justify-between ">
       <div className="p-2">
         <h3 className="uppercase md:text-2xl lg:text-3xl">chinmay.</h3>
@@ -106,5 +108,3 @@ const Navbar = () => {
     </div>
   );
 };
-
-export default Navbar;

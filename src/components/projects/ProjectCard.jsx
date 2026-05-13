@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProjectCard = (props) => {
+export default function ProjectCard (props){
   return (
     <>
       <div className="h-full lg:w-1/2 group relative rounded-none hover:rounded-[60px] overflow-hidden transition-[border-radius] duration-500">
@@ -35,4 +35,3 @@ const ProjectCard = (props) => {
   );
 };
 
-export default ProjectCard;
