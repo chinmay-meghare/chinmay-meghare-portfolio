@@ -66,11 +66,11 @@ export default function StickyCards() {
             {stickyCardsData.map((cardData, index) => (
                 <div className="sticky-card" key={index}>
                     <div className="sticky-card-index">
-                        <h1>{cardData.index}</h1>
+                        <h1 className="text-8xl">{cardData.index}</h1>
                     </div>
                     <div className="sticky-card-content">
                         <div className="sticky-card-content-wrapper">
-                            <h1 className="sticky-card-header">{cardData.title}</h1>
+                            <h1 className="sticky-card-header text-8xl">{cardData.title}</h1>
 
                             <div className="sticky-card-img">
                                 <img className="object-cover" src={cardData.image} alt="" />
