@@ -124,3 +124,8 @@ body {
  }
 
 }
+
+.char{
+  color: #71bd16;
+  transition: color 150ms ease-out;
+}

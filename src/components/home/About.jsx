@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AnimatedCopy from "../common/AnimatedCopy";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,7 +71,7 @@ export default function About() {
   }, []);
 
   return (
-    <section className="max-h-full relative p-6">
+    <div className="h-[200vh] relative p-6">
       {/* Image */}
       <div
         ref={imageDivRef}
@@ -88,28 +89,17 @@ export default function About() {
 
       {/* Content */}
       <div className="relative">
-        
-        {/* <div className="mt-[22vh]">
-            <h1 className="text-[15vw] text-right pr-40 capitalize leading-[14vw]">
-              chinmay <br /> meghare
-            </h1> 
-          </div> */}
 
         <div className="pl-[45%] ">
-          <p className="text-2  xl text-left px-4">
-            I'm Chinmay, a Frontend Developer currently in my third year of Communication Design. Originally from Nagpur and now based in Pune, I've gained hands-on experience through freelance projects and internships, shaping my approach towards thoughtful and impactful design.
-            <br />
-            <br />
+          <AnimatedCopy>
 
-            I work across branding, packaging, and publication design, and occasionally explore UI/UX to expand my practice. I focus on creating thoughtful, expressive, and impactful visual work.
+            <p className="text-6xl text-left px-4">
+              I'm Chinmay, a Frontend Engineer originally from Nagpur and now based in Pune,  with 1.3+ years of experience building scalable web applications using React.js, Next.js, and TypeScript.
+              Skilled in SSR/SSG, API integration, and state management using TanStack Query and Redux Toolkit. Focused on performance optimization, scalable frontend architecture, and building responsive user experiences   </p>
+          </AnimatedCopy>
 
-            <br />
-            <br />
-
-            I focus on bold typography, culture-driven ideas, and expressive visual systems to create work that feels distinct, engaging, and meaningful.
-          </p>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
