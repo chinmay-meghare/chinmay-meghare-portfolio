@@ -1,82 +1,86 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import TextReveal from "./TextReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function AnimatedHeader({ eyebrow, lines = [], className = "" }) {
-  const containerRef = useRef(null);
+export default function AnimatedHeader({
+  eyebrow,
+  lines = [],
+  className = "",
+  animateOnScroll = true,
+  delay = 0,
+  duration = 0.95,
+  ease = "power3.out",
+  stagger = 0,
+  start = "top 73%",
+  once = true,
+}) {
+  const eyebrowRef = useRef(null);
 
+  // Eyebrow label lightweight ScrollTrigger (fade + slide)
   useGSAP(
     () => {
-      // Create the timeline tied to this specific header block
-      const tl = gsap.timeline({
+      if (!eyebrowRef.current) return;
+
+      gsap.from(eyebrowRef.current, {
+        opacity: 0,
+        y: 14,
+        duration: 0.7,
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 73%",
-          toggleActions: "play none none none",
+          trigger: eyebrowRef.current,
+          start,
+          once,
         },
       });
-
-      // 1. Animate the eyebrow label if it exists
-      if (eyebrow) {
-        tl.from(".animate-label", {
-          opacity: 0,
-          y: 17,
-          duration: 0.7,
-          ease: "power2.out",
-        });
-      }
-
-      // 2. Query all elements with the '.animate-line' class inside this container
-      const animatedLines = gsap.utils.toArray(".animate-line");
-
-      // 3. Dynamically loop and build the slick cascading upward slide
-      animatedLines.forEach((line, index) => {
-        
-        const offset = index === 0 ? "-=0.3" : "-=0.65";
-        
-        tl.from(
-          line,
-          {
-            yPercent: 110,
-            duration: 0.95,
-            ease: "power3.out",
-          },
-          offset
-        );
-      });
     },
-    { scope: containerRef }
+    { scope: eyebrowRef, dependencies: [start, once] }
   );
 
   return (
-    <div ref={containerRef} className={`mb-14 px-6 md:mb-20 md:px-12 lg:px-20 ${className}`}>
-      {/* Eyebrow label */}
+    <div className={`mb-14 px-6 md:mb-20 md:px-12 lg:px-20 ${className}`}>
+
+      {/* Eyebrow label — simple fade, not a SplitText reveal */}
       {eyebrow && (
-        <p className="animate-label mb-4 text-xs uppercase tracking-[0.3em] text-primary md:mb-6 md:text-sm font-[font2]">
+        <p
+          ref={eyebrowRef}
+          className="mb-4 font-[font2] text-xs uppercase tracking-[0.3em] text-primary md:mb-6 md:text-sm"
+        >
           ✦ {eyebrow}
         </p>
       )}
 
-      {/* Dynamic Multi-line Title */}
-      <h2 className="font-[font1] leading-none tracking-tight uppercase">
+      {/* Display title — each line wrapped in overflow-hidden for curtain reveal */}
+      <h2 className="font-[font1] uppercase leading-none tracking-tight">
         {lines.map((lineObj, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={`overflow-hidden ${index > 0 ? "-mt-2 md:-mt-4" : ""}`}
           >
-            <span
-              className={`animate-line block ${lineObj.className || "text-white"}`}
+            <TextReveal
+              animateOnScroll={animateOnScroll}
+              delay={delay + index * 0.08}
+              duration={duration}
+              ease={ease}
+              stagger={0}
+              start={start}
+              once={once}
             >
-              {lineObj.text}
-            </span>
+              <span
+                className={`block ${lineObj.className || "text-white"}`}
+              >
+                {lineObj.text}
+              </span>
+            </TextReveal>
           </div>
         ))}
       </h2>
+
     </div>
   );
 }
