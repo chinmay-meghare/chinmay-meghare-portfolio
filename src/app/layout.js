@@ -3,6 +3,7 @@ import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 import Navbar from '@/components/navigation/Navbar';
 import FullScreenNav from '@/components/navigation/FullScreenNav';
 import NavContext from '@/context/NavContext';
+import CursorFollower from '@/components/common/CursorFollower';
 
 export const metadata = {
   title: 'Chinmay Meghare — Frontend Developer',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <CursorFollower/>
         <NavContext>
           <SmoothScrollProvider>
             <Navbar />
