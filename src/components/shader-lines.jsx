@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react"
+import * as THREE from "three";
 
 export function ShaderAnimation() {
   const containerRef = useRef(null)
@@ -10,17 +11,10 @@ export function ShaderAnimation() {
     uniforms: null,
     animationId: null,
   })
+  const resizeHandlerRef = useRef(null);
 
   useEffect(() => {
-    // Load Three.js dynamically
-    const script = document.createElement("script")
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"
-    script.onload = () => {
-      if (containerRef.current && window.THREE) {
-        initThreeJS()
-      }
-    }
-    document.head.appendChild(script)
+    initThreeJS();
 
     return () => {
       // Cleanup
@@ -30,14 +24,16 @@ export function ShaderAnimation() {
       if (sceneRef.current.renderer) {
         sceneRef.current.renderer.dispose()
       }
-      document.head.removeChild(script)
+
+      if (resizeHandlerRef.current) {
+        window.removeEventListener("resize", resizeHandlerRef.current);
+      }
     };
   }, [])
 
   const initThreeJS = () => {
-    if (!containerRef.current || !window.THREE) return
+    if (!containerRef.current) return
 
-    const THREE = window.THREE
     const container = containerRef.current
 
     // Clear any existing content
@@ -51,7 +47,7 @@ export function ShaderAnimation() {
     const scene = new THREE.Scene()
 
     // Create geometry
-    const geometry = new THREE.PlaneBufferGeometry(2, 2)
+    const geometry = new THREE.PlaneGeometry(2, 2)
 
     // Define uniforms
     const uniforms = {
@@ -136,12 +132,13 @@ export function ShaderAnimation() {
     // Handle resize
     const onWindowResize = () => {
       const rect = container.getBoundingClientRect()
-        renderer.setSize(rect.width, rect.height)
-        uniforms.resolution.value.x = renderer.domElement.width
+      renderer.setSize(rect.width, rect.height)
+      uniforms.resolution.value.x = renderer.domElement.width
       uniforms.resolution.value.y = renderer.domElement.height
     }
 
     onWindowResize()
+    resizeHandlerRef.current = onWindowResize;
     window.addEventListener("resize", onWindowResize, false)
 
     // Animation loop
