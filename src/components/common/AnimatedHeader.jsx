@@ -49,7 +49,7 @@ export default function AnimatedHeader({
       {eyebrow && (
         <p
           ref={eyebrowRef}
-          className="mb-4 font-[font2] text-xs uppercase tracking-[0.3em] text-primary md:mb-6 md:text-sm"
+          className="mb-4 font-[font2] text-xs uppercase tracking-[0.3em] text-white md:mb-6 md:text-sm"
         >
           ✦ {eyebrow}
         </p>

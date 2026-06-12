@@ -1,3 +1,5 @@
+"use client"
+
 import TextReveal from "../common/TextReveal";
 import { ShaderAnimation } from "../shader-lines";
 
