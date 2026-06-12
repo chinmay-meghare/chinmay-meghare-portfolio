@@ -180,6 +180,14 @@ section {
   will-change:transform;
 } */
 
+.grain {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.066) 1px,
+    transparent 1px
+  );
+  background-size: 3px 3px;
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);

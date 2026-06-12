@@ -6,6 +6,15 @@ export default function Hero() {
 
     <section className="h-screen w-full bg-black flex flex-col justify-center items-center text-white">
 
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/30 z-1" />
+
+      {/* Grain Texture */}
+      <div className="grain absolute inset-0 z-2"></div>
+
+      {/* Orange Glow  */}
+      <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/10 blur-[180px] z-10" />
+
       <ShaderAnimation />
 
       <div className="relative z-10">
