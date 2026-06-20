@@ -10,8 +10,8 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 export default function AnimatedCopy({
     children,
     colorInitial = "#333333",
-    colorAccent = "#abff02",
-    colorFinal = "#dddddd"
+    colorAccent = "#eb5939",
+    colorFinal = "#b7ab98"
 }) {
     const containerRef = useRef(null);
 

@@ -49,7 +49,7 @@ export default function AnimatedHeader({
       {eyebrow && (
         <p
           ref={eyebrowRef}
-          className="mb-4 font-[font2] text-xs uppercase tracking-[0.3em] text-white md:mb-6 md:text-sm"
+          className="mb-4 font-sans text-xs uppercase tracking-[0.3em] md:mb-6 md:text-sm"
         >
           ✦ {eyebrow}
         </p>
@@ -72,7 +72,7 @@ export default function AnimatedHeader({
               once={once}
             >
               <span
-                className={`block ${lineObj.className || "text-white"}`}
+                className={`block ${lineObj.className || ""}`}
               >
                 {lineObj.text}
               </span>

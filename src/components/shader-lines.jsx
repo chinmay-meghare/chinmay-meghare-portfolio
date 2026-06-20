@@ -90,16 +90,17 @@ export function ShaderAnimation() {
         uv.x = floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x);
         uv.y = floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y);       
           
-        float t = time*0.06+random(uv.x)*0.4;
+        float t = time*0.04+random(uv.x)*0.4;
         float lineWidth = 0.0008;
 
         vec3 color = vec3(0.0);
         for(int j = 0; j < 3; j++){
           for(int i=0; i < 5; i++){
-            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*1.0 - length(uv));        
+            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.003)*1.0 - length(uv));        
           }
         }
 
+        color *= 0.5;
         gl_FragColor = vec4(color[2],color[1],color[0],1.0);
       }
     `

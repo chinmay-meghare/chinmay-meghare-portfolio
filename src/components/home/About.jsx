@@ -74,7 +74,7 @@ export default function About() {
 
       {/* Right Column: Content */}
       <div className="w-full lg:w-1/2 py-10 lg:py-40">
-        <AnimatedCopy colorAccent="#abff02">
+        <AnimatedCopy>
           <p className="text-2xl md:text-5xl text-left px-4">
             I'm Chinmay, a Frontend Engineer originally from Nagpur and now based in Pune,  with 1.3+ years of experience building scalable web applications using React.js, Next.js, and TypeScript.
             <br /> <br />

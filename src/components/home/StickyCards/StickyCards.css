@@ -1,7 +1,4 @@
-:root{
-    --bg: #1a1a1a;
-    --fg:#edf1e8;
-}
+/* Using global variables from globals.css */
 
 .sticky-cards{
     position: relative;
