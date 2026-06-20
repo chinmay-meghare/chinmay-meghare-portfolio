@@ -1,156 +1,145 @@
 "use client";
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export function ShaderAnimation() {
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
   const sceneRef = useRef({
     camera: null,
     scene: null,
     renderer: null,
     uniforms: null,
     animationId: null,
-  })
+  });
   const resizeHandlerRef = useRef(null);
 
   useEffect(() => {
     initThreeJS();
 
     return () => {
-      // Cleanup
       if (sceneRef.current.animationId) {
-        cancelAnimationFrame(sceneRef.current.animationId)
+        cancelAnimationFrame(sceneRef.current.animationId);
       }
       if (sceneRef.current.renderer) {
-        sceneRef.current.renderer.dispose()
+        sceneRef.current.renderer.dispose();
       }
-
       if (resizeHandlerRef.current) {
         window.removeEventListener("resize", resizeHandlerRef.current);
       }
     };
-  }, [])
+  }, []);
 
   const initThreeJS = () => {
-    if (!containerRef.current) return
+    if (!containerRef.current) return;
 
-    const container = containerRef.current
+    const container = containerRef.current;
+    container.innerHTML = "";
 
-    // Clear any existing content
-    container.innerHTML = ""
+    const camera = new THREE.Camera();
+    camera.position.z = 1;
+    const scene = new THREE.Scene();
+    const geometry = new THREE.PlaneGeometry(2, 2);
 
-    // Initialize camera
-    const camera = new THREE.Camera()
-    camera.position.z = 1
-
-    // Initialize scene
-    const scene = new THREE.Scene()
-
-    // Create geometry
-    const geometry = new THREE.PlaneGeometry(2, 2)
-
-    // Define uniforms
+    // 🎨 Passing your exact CSS palette as uniforms to the GPU
     const uniforms = {
       time: { type: "f", value: 1.0 },
       resolution: { type: "v2", value: new THREE.Vector2() },
-    }
+      colorBg: { value: new THREE.Color("#0d0d0d") },
+      colorOrange: { value: new THREE.Color("#eb5939") },
+      colorCream: { value: new THREE.Color("#b7ab98") },
+    };
 
-    // Vertex shader
     const vertexShader = `
       void main() {
-        gl_Position = vec4( position, 1.0 );
+        gl_Position = vec4(position, 1.0);
       }
-    `
+    `;
 
-    // Fragment shader
     const fragmentShader = `
       #define TWO_PI 6.2831853072
       #define PI 3.14159265359
 
       precision highp float;
+      
       uniform vec2 resolution;
       uniform float time;
+      
+      // Injecting our palette
+      uniform vec3 colorBg;
+      uniform vec3 colorOrange;
+      uniform vec3 colorCream;
         
       float random (in float x) {
           return fract(sin(x)*1e4);
       }
-      float random (vec2 st) {
-          return fract(sin(dot(st.xy,
-                               vec2(12.9898,78.233)))*
-              43758.5453123);
-      }
       
-      varying vec2 vUv;
-
       void main(void) {
+        // Normalize coordinates
         vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
         
+        // The mosaic/pixelation effect from your original code
         vec2 fMosaicScal = vec2(4.0, 2.0);
-        vec2 vScreenSize = vec2(256,256);
+        vec2 vScreenSize = vec2(256.0, 256.0);
         uv.x = floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x);
         uv.y = floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y);       
           
-        float t = time*0.04+random(uv.x)*0.4;
+        float t = time * 0.04 + random(uv.x) * 0.4;
         float lineWidth = 0.0008;
 
-        vec3 color = vec3(0.0);
-        for(int j = 0; j < 3; j++){
-          for(int i=0; i < 5; i++){
-            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.003)*1.0 - length(uv));        
-          }
+        // Calculate intensity for the primary orange lines
+        float intensityOrange = 0.0;
+        for(int i = 0; i < 5; i++){
+          intensityOrange += lineWidth * float(i*i) / abs(fract(t + float(i)*0.003) * 1.0 - length(uv));
         }
 
-        color *= 0.5;
-        gl_FragColor = vec4(color[2],color[1],color[0],1.0);
-      }
-    `
+        // Calculate a secondary intensity for the cream lines (slightly offset)
+        float intensityCream = 0.0;
+        for(int i = 0; i < 5; i++){
+          intensityCream += (lineWidth * 0.5) * float(i*i) / abs(fract(t - 0.015 + float(i)*0.003) * 1.0 - length(uv));
+        }
 
-    // Create material
+        // Blend the background with our two glowing line colors
+        vec3 finalColor = colorBg + (colorOrange * intensityOrange * 0.6) + (colorCream * intensityCream * 0.8);
+        
+        gl_FragColor = vec4(finalColor, 1.0);
+      }
+    `;
+
     const material = new THREE.ShaderMaterial({
       uniforms: uniforms,
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
-    })
+    });
 
-    // Create mesh and add to scene
-    const mesh = new THREE.Mesh(geometry, material)
-    scene.add(mesh)
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
-    // Initialize renderer
-    const renderer = new THREE.WebGLRenderer()
-    renderer.setPixelRatio(window.devicePixelRatio)
-    container.appendChild(renderer.domElement)
+    const renderer = new THREE.WebGLRenderer({ alpha: false }); // Background is handled in shader
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
 
-    // Store references
-    sceneRef.current = {
-      camera,
-      scene,
-      renderer,
-      uniforms,
-      animationId: null,
-    }
+    sceneRef.current = { camera, scene, renderer, uniforms, animationId: null };
 
-    // Handle resize
     const onWindowResize = () => {
-      const rect = container.getBoundingClientRect()
-      renderer.setSize(rect.width, rect.height)
-      uniforms.resolution.value.x = renderer.domElement.width
-      uniforms.resolution.value.y = renderer.domElement.height
-    }
+      const rect = container.getBoundingClientRect();
+      renderer.setSize(rect.width, rect.height);
+      uniforms.resolution.value.x = renderer.domElement.width;
+      uniforms.resolution.value.y = renderer.domElement.height;
+    };
 
-    onWindowResize()
+    onWindowResize();
     resizeHandlerRef.current = onWindowResize;
-    window.addEventListener("resize", onWindowResize, false)
+    window.addEventListener("resize", onWindowResize, false);
 
-    // Animation loop
     const animate = () => {
-      sceneRef.current.animationId = requestAnimationFrame(animate)
-      uniforms.time.value += 0.05
-      renderer.render(scene, camera)
-    }
+      sceneRef.current.animationId = requestAnimationFrame(animate);
+      uniforms.time.value += 0.05;
+      renderer.render(scene, camera);
+    };
 
-    animate()
-  }
+    animate();
+  };
 
-  return (<div ref={containerRef} className="w-full h-full absolute" />);
-}
+  // Added z-0 to explicitly map its layer behavior inside your Hero component
+  return <div ref={containerRef} className="w-full h-full absolute inset-0 z-0" />;
+} 
