@@ -21,9 +21,8 @@ export default function Hero() {
  
       <div className="relative z-10">
         <TextReveal animateOnScroll={false} delay={0.7} duration={0.8}>
-          <h1 className="text-6xl font-black uppercase italic tracking-tight">
-            I blend <span className="text-emerald-400">engineering</span> with
-            design.
+          <h1 className="p-4 text-6xl">
+            I blend engineering with design
           </h1>
           <p className="mb-4 text-sm font-medium tracking-wide sm:text-base lg:text-lg">
             Hi, I'm Chinmay a curious product designer who loves asking "why"

@@ -4,11 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* 
-  Expert Tip: Consolidate your variables in one place. 
-  Mapping your custom palette to standard Shadcn/Tailwind variables 
-  ensures consistency across all UI components.
-*/
 :root {
   /* --- Custom Palette --- */
   --bg: #0d0d0d; /* 60% — dominant background */
@@ -52,30 +47,23 @@
 }
 
 .dark {
-  /* If you want a specific dark mode, define it here. 
-     Currently, your main palette is already dark-themed. */
+  /* Currently, my main palette is already dark-themed. */
   --background: #050505;
   --foreground: #d1c7b7;
 }
 
-@theme {
+@theme default {
   --color-orange: var(--orange);
   --color-orange-hover: var(--orange-hover);
   --color-cream: var(--cream);
   --color-cream-dim: var(--cream-dim);
 
-  --font-inter: "inter", sans-serif;
   --font-sans: var(--font-inter);
+  --font-fraunces: var(--font-fraunces);
+  --font-jetbrains: var(--font-jetbrains);
 }
 
 @layer base {
-  @font-face {
-    font-family: inter;
-    src: url(/fonts/Inter-VariableFont_wght.woff2);
-    font-weight: 100 900;
-    font-display: swap;
-  }
-
   * {
     border-color: var(--border);
     outline-color: var(--ring);
@@ -92,10 +80,14 @@
     @apply scroll-smooth;
   }
 
+  h1 {
+    font-family: var(--font-fraunces);
+    font-weight: 400;
+  }
+
   section {
     position: relative;
     width: 100%;
-    /* Inherits color from body by default now */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,10 +147,11 @@ html.lenis body {
 }
 
 .char {
-  color: var(--orange); /* Use your palette variable */
+  color: var(--orange);
   transition: color 150ms ease-out;
 }
 
+/* grain overlay in Hero.jsx */
 .grain {
   background-image: radial-gradient(
     rgba(255, 255, 255, 0.03) 1px,

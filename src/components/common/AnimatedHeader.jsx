@@ -49,14 +49,14 @@ export default function AnimatedHeader({
       {eyebrow && (
         <p
           ref={eyebrowRef}
-          className="mb-4 font-sans text-xs uppercase tracking-[0.3em] md:mb-6 md:text-sm"
+          className="mb-4 font-jetbrains text-xs uppercase tracking-[0.3em] md:mb-6 md:text-sm"
         >
           ✦ {eyebrow}
         </p>
       )}
 
       {/* Display title — each line wrapped in overflow-hidden for curtain reveal */}
-      <h2 className="font-[font1] uppercase leading-none tracking-tight">
+      <h1 className=" uppercase leading-none tracking-tight">
         {lines.map((lineObj, index) => (
           <div
             key={index}
@@ -79,7 +79,7 @@ export default function AnimatedHeader({
             </TextReveal>
           </div>
         ))}
-      </h2>
+      </h1>
 
     </div>
   );

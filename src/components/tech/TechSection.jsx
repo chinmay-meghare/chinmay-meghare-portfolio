@@ -5,8 +5,8 @@ import TechMarquee from "./TechMarquee";
 
 export default function TechSection() {
   const headerLines = [
-    { text: "My", className: "text-[13vw] font-thin md:text-[10vw] lg:text-[8vw]" },
-    { text: "Arsenal", className: "text-[13vw] font-black md:text-[10vw] lg:text-[8vw]" }
+    { text: "My", className: "text-[13vw] md:text-[10vw] lg:text-[8vw]"},
+    { text: "Arsenal", className: "text-[13vw] md:text-[10vw] lg:text-[8vw]"}
   ];
 
   return (
