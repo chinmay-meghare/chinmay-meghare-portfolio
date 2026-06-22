@@ -34,7 +34,7 @@
 }
 
 .sticky-card-index{
-    flex:2;
+    flex:1;
 }
 
 .sticky-card-content{
@@ -50,11 +50,11 @@
 }
 
 .sticky-card-header{
-     width: 75%;   
+    width: 100%;   
 }
 
 .sticky-card-img img{
-    aspect-ratio: 5/3;
+    width: 50%;
 }
 
 .sticky-card-copy{

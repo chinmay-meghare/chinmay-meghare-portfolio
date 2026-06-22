@@ -4,12 +4,12 @@ import Hero from "../components/home/Hero";
 import TechSection from "../components/tech/TechSection";
 
 export default function HomePage() {
-    return (
-        <>
-            <Hero/>
-            <About/>
-            <TechSection/>
-            <StickyCards/>
-        </>
-    )
+  return (
+    <>
+      <Hero />
+      <About />
+      <TechSection />
+      <StickyCards />
+    </>
+  );
 }

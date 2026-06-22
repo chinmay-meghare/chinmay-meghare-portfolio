@@ -5,6 +5,7 @@ import FullScreenNav from "@/components/navigation/FullScreenNav";
 import NavContext from "@/context/NavContext";
 import CursorFollower from "@/components/common/CursorFollower";
 import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
+import Footer from "@/components/common/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
             {children}
           </SmoothScrollProvider>
         </NavContext>
+        <Footer/>
       </body>
     </html>
   );

@@ -56,7 +56,7 @@ export default function AnimatedHeader({
       )}
 
       {/* Display title — each line wrapped in overflow-hidden for curtain reveal */}
-      <h1 className=" uppercase leading-none tracking-tight">
+      <h1 className="leading-tight tracking-tight">
         {lines.map((lineObj, index) => (
           <div
             key={index}
