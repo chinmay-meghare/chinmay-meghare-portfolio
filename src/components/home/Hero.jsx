@@ -21,7 +21,7 @@ export default function Hero() {
  
       <div className="relative z-10">
         <TextReveal animateOnScroll={false} delay={0.7} duration={0.8}>
-          <h1 className="p-4 text-6xl">
+          <h1 className="p-2 text-6xl leading-tight">
             I blend engineering with design
           </h1>
           <p className="mb-4 text-sm font-medium tracking-wide sm:text-base lg:text-lg">

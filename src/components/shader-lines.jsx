@@ -44,7 +44,7 @@ export function ShaderAnimation() {
     const uniforms = {
       time: { type: "f", value: 1.0 },
       resolution: { type: "v2", value: new THREE.Vector2() },
-      colorBg: { value: new THREE.Color("#0d0d0d") },
+      colorBg: { value: new THREE.Color("#262323") },
       colorOrange: { value: new THREE.Color("#eb5939") },
       colorCream: { value: new THREE.Color("#b7ab98") },
     };
@@ -101,7 +101,16 @@ export function ShaderAnimation() {
         // Blend the background with our two glowing line colors
         vec3 finalColor = colorBg + (colorOrange * intensityOrange * 0.6) + (colorCream * intensityCream * 0.8);
         
-        gl_FragColor = vec4(finalColor, 1.0);
+        // gl_FragColor = vec4(finalColor, 1.0);
+        // 1. Get your vertical screen coordinate normalized from 0.0 (bottom) to 1.0 (top)
+        float verticalPosition = gl_FragCoord.y / resolution.y;
+
+        // 2. Create a smooth gradient mask that fades out at the bottom 20% of the container
+        float edgeAlpha = smoothstep(0.0, 0.2, verticalPosition);
+
+        // 3. Output color with the alpha mask applied
+        gl_FragColor = vec4(finalColor, edgeAlpha);
+    
       }
     `;
 
@@ -109,12 +118,13 @@ export function ShaderAnimation() {
       uniforms: uniforms,
       vertexShader: vertexShader,
       fragmentShader: fragmentShader,
-    });
+      transparent: true,  
+    }); 
 
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    const renderer = new THREE.WebGLRenderer({ alpha: false }); // Background is handled in shader
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     container.appendChild(renderer.domElement);
 
@@ -141,5 +151,5 @@ export function ShaderAnimation() {
   };
 
   // Added z-0 to explicitly map its layer behavior inside your Hero component
-  return <div ref={containerRef} className="w-full h-full absolute inset-0 z-0" />;
+  return <div ref={containerRef} className="w-full h-full absolute inset-0 z-0 " />;
 } 

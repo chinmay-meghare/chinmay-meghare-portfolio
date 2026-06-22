@@ -154,7 +154,7 @@ html.lenis body {
 /* grain overlay in Hero.jsx */
 .grain {
   background-image: radial-gradient(
-    rgba(255, 255, 255, 0.03) 1px,
+    rgba(184, 180, 180, 0.06) 1px,
     transparent 1px
   );
   background-size: 3px 3px;
